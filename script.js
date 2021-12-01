@@ -94,3 +94,19 @@ function playGame() {
 }
 
 playGame();
+
+// DOM //
+// 1. How will the UI look?
+//    1.1. An "Start Game" button that desapears or turns into dots when the game starts.
+//    1.2. The "What's your pick?" message, and the result of each successive single round message will be displayed 
+//         inside the .rounds container.
+//    1.3. When the user clicks a button, the respective choice is inputed to the playGame() function.
+//    1.4. The score is updated as each round is played.
+//    1.5. When the round ends, the play button apears again with a text that says "Play Again", and starts a new game when is clicked.
+//         It also desapears or enters a transition state, just to turn into play again later once the round ends.
+
+// 2. Refactor your functions so instead of taking a text input in the form of an user prompt, the user inputs her choice by
+//    clicking a button, or pressing it.
+//    2.1. computerPlay().
+//    2.2. singleRound().
+//    2.3. playGame().

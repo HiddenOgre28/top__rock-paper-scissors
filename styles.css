@@ -15,12 +15,12 @@ body {
     background-color: #003366;
 }
 
-/* 
+
 button {
     border: none;
     background: none;
 }
-*/
+
 
 /* Layout */
 .container {
@@ -42,12 +42,20 @@ button {
     font-weight: bold;
     margin: 2% auto;
     color: white;
-    width: 30%;
+    width: 55%;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1%;
 }
 
 .rounds {
     width: 40%;
-    height: 100px;
+    height: 200px;
     margin-bottom: 2%;
     background-color: white;
 }
@@ -63,10 +71,25 @@ button {
     font-size: 3rem;
 }
 
+.play__btn {
+    margin: 0 2%;
+    padding: 2%;
+    width: 15rem;
+    margin-right: 6rem;
+    font-size: 1.2rem;
+    background-color: #007fff;
+    color: white;
+}
+
+.play__btn:hover {
+    cursor: pointer;
+}
+
 .choice {
     margin: 0 2%;
     padding: 1%;
     font-size: 1.2rem;
+    width: 10.1rem;
     background-color: #007fff;
     color: white;
 }
