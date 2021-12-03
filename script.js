@@ -36,33 +36,6 @@ let finalResult = () => {
   return `It's a tie!`;
 };
 
-function singleRound(playerSelection, computerSelection) {
-  playerSelection = makeLowerCase(playerSelection);
-
-  if (
-    (playerSelection === `rock` && computerSelection === `scissors`) ||
-    (playerSelection === `paper` && computerSelection === `rock`) ||
-    (playerSelection === `scissors` && computerSelection === `paper`)
-  ) {
-    playerPoints++;
-    return `You win! ${playerSelection[0].toUpperCase() + playerSelection.slice(1,)} beats ${computerSelection}!`;
-  } else if (
-    (playerSelection === `rock` && computerSelection === `paper`) ||
-    (playerSelection === `paper` && computerSelection === `scissors`) ||
-    (playerSelection === `scissors` && computerSelection === `rock`)
-  ) {
-    computerPoints++;
-    return `You lose! ${computerSelection[0].toUpperCase() + computerSelection.slice(1,)} beats ${playerSelection}!`;
-  } else if ( playerSelection === computerSelection) {
-    playerPoints++;
-    computerPoints++;
-    return `It's a tie! Try again`;
-  } else {
-    computerPoints++;
-    return `Wrong! That's not an option. Point for the computer!`
-  }
-}
-
 // game Function:
 
 // Write a NEW function called game(). Use the previous function inside of this one to 
@@ -76,24 +49,24 @@ function singleRound(playerSelection, computerSelection) {
 //    push result into the array.
 // 5. Make a point counter function that resturn a win statement (e.g. "You win!" / "You lose") and print it out to the console.
 
-function playGame() {
-  const NUMBER_OF_ROUNDS = 5;
-  let result;
-  let array = [];
+// function playGame() {
+//   const NUMBER_OF_ROUNDS = 5;
+//   let result;
+//   let array = [];
 
-  for (let i = 0; i < NUMBER_OF_ROUNDS; i++) {
-    let computerSelection = computerPlay();
-    let playerSelection = prompt(`What's your pick?`);
+//   for (let i = 0; i < NUMBER_OF_ROUNDS; i++) {
+//     let computerSelection = computerPlay();
+//     let playerSelection = prompt(`What's your pick?`);
 
-    result = singleRound(playerSelection, computerSelection);
-    array.push(result);
+//     result = singleRound(playerSelection, computerSelection);
+//     array.push(result);
     
-    console.log(array.slice(-1));
-  }
-  return console.log(`${finalResult()} You got ${playerPoints} points against the cumputer's ${computerPoints} points.`);
-}
+//     console.log(array.slice(-1));
+//   }
+//   return console.log(`${finalResult()} You got ${playerPoints} points against the cumputer's ${computerPoints} points.`);
+// }
 
-playGame();
+// playGame();
 
 // DOM //
 // 1. How will the UI look?
@@ -110,3 +83,55 @@ playGame();
 //    2.1. computerPlay().
 //    2.2. singleRound().
 //    2.3. playGame().
+
+let rock = document.querySelector(".choice__rock");
+let paper = document.querySelector(".choice__paper");
+let scissors = document.querySelector(".choice__scissors");
+
+let playerScore = document.querySelector(".score__player");
+let computerScore = document.querySelector(".score__computer");
+
+rock.addEventListener("click", singleRound);
+paper.addEventListener("click", singleRound);
+scissors.addEventListener("click", singleRound);
+
+// Refactor singleRound() to accept e.event.textContent as playerSelection. Break it into smaller functions if in doubt.
+function singleRound(e) {
+  let computerSelection = computerPlay();
+  let playerSelection = e.target.textContent;
+  playerSelection = makeLowerCase(playerSelection);
+
+  decidePoints(playerSelection, computerSelection);
+
+  playerScore.innerHTML = `Your score is: ${playerPoints} points.`;
+  computerScore.innerHTML = `The bot score is: ${computerPoints} points.`
+}
+
+function decidePoints(playerSelection, computerSelection) {
+  if (
+    (playerSelection === `rock` && computerSelection === `scissors`) ||
+    (playerSelection === `paper` && computerSelection === `rock`) ||
+    (playerSelection === `scissors` && computerSelection === `paper`)
+  ) {
+    playerPoints++;
+    return console.log(`You win! ${playerSelection[0].toUpperCase() + playerSelection.slice(1,)} beats ${computerSelection}!`);
+  } else if (
+    (playerSelection === `rock` && computerSelection === `paper`) ||
+    (playerSelection === `paper` && computerSelection === `scissors`) ||
+    (playerSelection === `scissors` && computerSelection === `rock`)
+  ) {
+    computerPoints++;
+    return console.log(`You lose! ${computerSelection[0].toUpperCase() + computerSelection.slice(1,)} beats ${playerSelection}!`);
+  } else if ( playerSelection === computerSelection) {
+    playerPoints++;
+    computerPoints++;
+    return console.log(`It's a tie! Try again`);
+  } else {
+    computerPoints++;
+    return console.log(`Wrong! That's not an option. Point for the computer!`);
+  }
+}
+
+function endRound() {
+  
+}
