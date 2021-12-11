@@ -83,23 +83,17 @@ let finalResult = () => {
 //    2.1. computerPlay().
 //    2.2. singleRound().
 //    2.3. playGame().
+const choices = document.querySelectorAll(".choice");
+const playerScore = document.querySelector(".score__player");
+const computerScore = document.querySelector(".score__computer");
+const rounds = document.querySelector(".rounds");
 
-let rock = document.querySelector(".choice__rock");
-let paper = document.querySelector(".choice__paper");
-let scissors = document.querySelector(".choice__scissors");
-
-let playerScore = document.querySelector(".score__player");
-let computerScore = document.querySelector(".score__computer");
-
-rock.addEventListener("click", singleRound);
-paper.addEventListener("click", singleRound);
-scissors.addEventListener("click", singleRound);
+choices.forEach((choice) => addEventListener("click", singleRound));
 
 // Refactor singleRound() to accept e.event.textContent as playerSelection. Break it into smaller functions if in doubt.
 function singleRound(e) {
   let computerSelection = computerPlay();
   let playerSelection = e.target.textContent;
-  playerSelection = makeLowerCase(playerSelection);
 
   decidePoints(playerSelection, computerSelection);
 
@@ -108,30 +102,44 @@ function singleRound(e) {
 }
 
 function decidePoints(playerSelection, computerSelection) {
+  let partialResult;
+  let roundsChild;
+  playerSelection = makeLowerCase(playerSelection);
+
   if (
     (playerSelection === `rock` && computerSelection === `scissors`) ||
     (playerSelection === `paper` && computerSelection === `rock`) ||
     (playerSelection === `scissors` && computerSelection === `paper`)
   ) {
     playerPoints++;
-    return console.log(`You win! ${playerSelection[0].toUpperCase() + playerSelection.slice(1,)} beats ${computerSelection}!`);
+    partialResult = `You win! ${playerSelection[0].toUpperCase() + playerSelection.slice(1,)} beats ${computerSelection}!`;
+    roundsChild = document.createTextNode(partialResult);
+    rounds.appendChild(roundsChild);
   } else if (
     (playerSelection === `rock` && computerSelection === `paper`) ||
     (playerSelection === `paper` && computerSelection === `scissors`) ||
     (playerSelection === `scissors` && computerSelection === `rock`)
   ) {
     computerPoints++;
-    return console.log(`You lose! ${computerSelection[0].toUpperCase() + computerSelection.slice(1,)} beats ${playerSelection}!`);
+    partialResult = `You lose! ${computerSelection[0].toUpperCase() + computerSelection.slice(1,)} beats ${playerSelection}!`;
+    roundsChild = document.createTextNode(partialResult);
+    rounds.appendChild(roundsChild);
   } else if ( playerSelection === computerSelection) {
     playerPoints++;
     computerPoints++;
-    return console.log(`It's a tie! Try again`);
+    partialResult = `It's a tie! Try again`;
+    roundsChild = document.createTextNode(partialResult);
+    rounds.appendChild(roundsChild);
   } else {
     computerPoints++;
-    return console.log(`Wrong! That's not an option. Point for the computer!`);
+    partialResult = `Wrong! That's not an option. Point for the computer!`;
+    roundsChild = document.createTextNode(partialResult);
+    rounds.appendChild(roundsChild);
   }
 }
 
-function endRound() {
-  
+function endGame() {
+  if(playerScore > 5 || computerScore > 5) {
+    return;
+  }
 }
