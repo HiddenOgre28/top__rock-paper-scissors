@@ -1,6 +1,12 @@
-const shitList = {
-    caca: "culo",
-    trasero: "ass",
+const animals = {
+    cat: "godinez",
+    dog: "negro",
 };
 
-console.log(shitList);
+const babies = {
+    baby1: "victoria",
+    baby2: "angela",
+}
+
+console.log(animals);
+console.log(babies);
